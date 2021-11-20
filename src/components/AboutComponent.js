@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-function RenderPartner(partner) {
+function RenderPartner({ partner }) {
   if (partner) {
     return (
       <React.Fragment>
@@ -21,7 +21,7 @@ function RenderPartner(partner) {
       </React.Fragment>
     );
   } else {
-    <div />;
+    return <div />;
   }
 }
 
@@ -31,7 +31,6 @@ function About(props) {
       <Media key={partner.id} tag="li">
         <RenderPartner partner={partner} />
       </Media>
-      // <h5>{partner.name}</h5>
     );
   });
 
