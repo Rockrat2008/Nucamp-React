@@ -46,17 +46,17 @@ class Contact extends Component {
     };
 
     if (this.state.touched.firstName) {
-      if (firstName < 2) {
+      if (firstName.length < 2) {
         errors.firstName = "First name must be at least 2 characters.";
-      } else if (firstName > 15) {
+      } else if (firstName.length > 15) {
         errors.firstName = "First name must be 15 characters or less.";
       }
     }
 
     if (this.state.touched.lastName) {
-      if (lastName < 2) {
+      if (lastName.length < 2) {
         errors.lastName = "Last name must be at least 2 characters.";
-      } else if (lastName > 15) {
+      } else if (lastName.length > 15) {
         errors.lastName = "Last name must be 15 characters or less.";
       }
     }
