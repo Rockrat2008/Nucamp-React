@@ -115,41 +115,41 @@ class Header extends Component {
           </div>
         </Navbar>
 
-        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal} />
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.handleLogin}>
               <FormGroup>
-                <label htmlFor="username">Username</label>
-                <input
+                <Label htmlFor="username">Username</Label>
+                <Input
                   type="text"
                   id="username"
                   name="username"
-                  innerRef={(input) => (this.username = input)}
+                  innerRef={(Input) => (this.username = Input)}
                 />
               </FormGroup>
               <FormGroup>
-                <label htmlFor="password">Password</label>
-                <input
+                <Label htmlFor="password">Password</Label>
+                <Input
                   type="password"
                   id="password"
                   name="password"
-                  innerRef={(input) => (this.password = input)}
+                  innerRef={(Input) => (this.password = Input)}
                 />
               </FormGroup>
               <FormGroup check>
-                <label check>
-                  <input
+                <Label check>
+                  <Input
                     type="checkbox"
                     name="remember"
-                    innerRef={(input) => (this.remember = input)}
+                    innerRef={(Input) => (this.remember = Input)}
                   />
                   Remember me
-                </label>
+                </Label>
               </FormGroup>
-              <button type="submit" value="submit" color="primary">
+              <Button type="submit" value="submit" color="primary">
                 Login
-              </button>
+              </Button>
             </Form>
           </ModalBody>
         </Modal>
