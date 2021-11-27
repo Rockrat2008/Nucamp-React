@@ -1,14 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   Card,
   CardImg,
   CardText,
   CardBody,
   CardTitle,
+  Button,
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Control, LocalForm, Errors } from "react-redux-form";
 
 function RenderCampsite({ campsite }) {
   return (
@@ -40,11 +42,24 @@ function RenderComments({ comments }) {
               }).format(new Date(Date.parse(comment.date)))}
             </div>
           </div>
+          
         ))}
+        <CommentForm />
       </div>
     );
   }
   return <div />;
+}
+
+class CommentForm extends Component {
+  render() {
+    return (
+      <Button outline type="submit">
+        <i className="fa fa-pencil fa-lg" />
+        Submit Comment
+      </Button>
+    );
+  }
 }
 
 function CampsiteInfo(props) {
