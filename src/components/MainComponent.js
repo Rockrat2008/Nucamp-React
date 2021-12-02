@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { actions } from "react-redux-form";
 import Directory from "./DirectoryComponent";
 import CampsiteInfo from "./CampsiteInfoComponent";
 import Header from "./HeaderComponent";
@@ -9,7 +10,7 @@ import { connect } from "react-redux";
 import Contact from "./ContactComponent";
 import About from "./AboutComponent";
 import { STATEMENT_TYPES } from "@babel/types";
-import { addComment } from "../redux/ActionCreators";
+import { addComment, fetchCampsites } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
   return {
@@ -21,17 +22,28 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  addComment: (campsiteId, rating, author, text) => (addComment(campsiteId, rating, author, text))
+  addComment: (campsiteId, rating, author, text) =>
+    addComment(campsiteId, rating, author, text),
+  fetchCampsites: () => fetchCampsites(),
+  resetFeedbackForm: () => actions.reset("feedbackForm"),
 };
 
 class Main extends Component {
+  componentDidMount() {
+    this.props.fetchCampsites();
+  }
+
   render() {
     const HomePage = () => {
       return (
         <Home
           campsite={
-            this.props.campsites.filter((campsite) => campsite.featured)[0]
+            this.props.campsites.campsites.filter(
+              (campsite) => campsite.featured
+            )[0]
           }
+          campsitesLoading={this.props.campsites.isLoading}
+          campsitesErrMess={this.props.campsites.errMess}
           promotion={
             this.props.promotions.filter((promotion) => promotion.featured)[0]
           }
@@ -44,14 +56,16 @@ class Main extends Component {
       return (
         <CampsiteInfo
           campsite={
-            this.props.campsites.filter(
+            this.props.campsites.campsites.filter(
               (campsite) => campsite.id === +match.params.campsiteId
             )[0]
           }
+          isLoading={this.props.campsites.isLoading}
+          errMess={this.props.campsites.errMess}
           comments={this.props.comments.filter(
             (comment) => comment.campsiteId === +match.params.campsiteId
           )}
-          addComment = {this.props.addComment}
+          addComment={this.props.addComment}
         />
       );
     };
@@ -71,7 +85,13 @@ class Main extends Component {
             path="/aboutus"
             render={() => <About partners={this.props.partners} />}
           />
-          <Route exact path="/contactus" component={Contact} />
+          <Route
+            exact
+            path="/contactus"
+            render={() => (
+              <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+            )}
+          />
           <Redirect to="/home" />
         </Switch>
         <Footer />
