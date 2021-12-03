@@ -16,8 +16,7 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import { NavLink, navLink } from "react-router-dom";
-import Col from "reactstrap/lib/Col";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {

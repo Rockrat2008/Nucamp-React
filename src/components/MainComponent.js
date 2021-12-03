@@ -9,7 +9,6 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Contact from "./ContactComponent";
 import About from "./AboutComponent";
-import { STATEMENT_TYPES } from "@babel/types";
 import {
   postComment,
   fetchCampsites,
