@@ -75,14 +75,6 @@ function PartnerList(props) {
 }
 
 function About(props) {
-  // const partners = props.partners.map((partner) => {
-  //   return (
-  //     <Media key={partner.id} tag="li">
-  //       <RenderPartner partner={partner} />
-  //     </Media>
-  //   );
-  // });
-
   return (
     <div className="container">
       <div className="row">
@@ -153,9 +145,6 @@ function About(props) {
           <h3>Community Partners</h3>
         </div>
         <PartnerList partners={props.partners} />
-        {/* <div className="col mt-4">
-          <Media list>{partners}</Media>
-        </div> */}
       </div>
     </div>
   );

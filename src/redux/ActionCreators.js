@@ -200,29 +200,17 @@ export const partnersFailed = (errMess) => ({
   payload: errMess,
 });
 
-export const postFeedback = (
-  firstName,
-  lastName,
-  phoneNum,
-  email,
-  agree,
-  contactType,
-  feedback
-) => {
+export const postFeedback = (feedback) => () => {
+
   const newFeedback = {
-    firstName: firstName,
-    lastName: lastName,
-    phoneNum: phoneNum,
-    email: email,
-    agree: agree,
-    contactType: contactType,
-    feedback: feedback,
+    feedback: feedback
   };
+
   newFeedback.date = new Date().toISOString();
 
   return fetch(baseUrl + "feedback", {
     method: "POST",
-    body: JSON.stringify(newFeedback),
+    body: JSON.stringify(feedback),
     headers: {
       "Content-Type": "application/json",
     },
@@ -244,9 +232,9 @@ export const postFeedback = (
       }
     )
     .then((response) => response.json())
-    // .then((response) => dispatch(addComment(response)))
+    .then((response) => alert(`Thank you for your feedback. ${JSON.stringify(response)}`))
     .catch((error) => {
-      console.log("post feeback", error.message);
+      console.log("post feedback", error.message);
       alert(`Your feedback could not be posted. Error: ` + error.message);
     });
 };

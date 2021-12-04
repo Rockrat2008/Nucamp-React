@@ -31,24 +31,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   postComment: (campsiteId, rating, author, text) =>
     postComment(campsiteId, rating, author, text),
-  postFeedback: (
-    firstName,
-    lastName,
-    phoneNum,
-    email,
-    agree,
-    contactType,
-    feedback
-  ) =>
-    postFeedback(
-      firstName,
-      lastName,
-      phoneNum,
-      email,
-      agree,
-      contactType,
-      feedback
-    ),
+  postFeedback: (firstName, lastName, phoneNum, email, agree, contactType, feedback) => postFeedback(firstName, lastName, phoneNum, email, agree, contactType, feedback),
   fetchCampsites: () => fetchCampsites(),
   resetFeedbackForm: () => actions.reset("feedbackForm"),
   fetchComments: () => fetchComments(),
@@ -137,7 +120,10 @@ class Main extends Component {
                 exact
                 path="/contactus"
                 render={() => (
-                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback} />
+                  <Contact
+                    resetFeedbackForm={this.props.resetFeedbackForm}
+                    postFeedback={this.props.postFeedback}
+                  />
                 )}
               />
               <Redirect to="/home" />
