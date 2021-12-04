@@ -11,6 +11,7 @@ import Contact from "./ContactComponent";
 import About from "./AboutComponent";
 import {
   postComment,
+  postFeedback,
   fetchCampsites,
   fetchComments,
   fetchPartners,
@@ -30,6 +31,24 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   postComment: (campsiteId, rating, author, text) =>
     postComment(campsiteId, rating, author, text),
+  postFeedback: (
+    firstName,
+    lastName,
+    phoneNum,
+    email,
+    agree,
+    contactType,
+    feedback
+  ) =>
+    postFeedback(
+      firstName,
+      lastName,
+      phoneNum,
+      email,
+      agree,
+      contactType,
+      feedback
+    ),
   fetchCampsites: () => fetchCampsites(),
   resetFeedbackForm: () => actions.reset("feedbackForm"),
   fetchComments: () => fetchComments(),
@@ -63,7 +82,11 @@ class Main extends Component {
           }
           promotionLoading={this.props.promotions.isLoading}
           promotionErrMess={this.props.promotions.errMess}
-          partner={this.props.partners.partners.filter((partner) => partner.featured)[0]}
+          partner={
+            this.props.partners.partners.filter(
+              (partner) => partner.featured
+            )[0]
+          }
           partnerLoading={this.props.partners.isLoading}
           partnerErrMess={this.props.partners.errMess}
         />
@@ -114,7 +137,7 @@ class Main extends Component {
                 exact
                 path="/contactus"
                 render={() => (
-                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback} />
                 )}
               />
               <Redirect to="/home" />

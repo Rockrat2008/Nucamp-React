@@ -16,7 +16,12 @@ function RenderPartner({ partner }) {
   if (partner) {
     return (
       <React.Fragment>
-        <Media object width="150" src={baseUrl + partner.image} alt={partner.name} />
+        <Media
+          object
+          width="150"
+          src={baseUrl + partner.image}
+          alt={partner.name}
+        />
         <Media body className="mdl-5 mb-4">
           <Media heading>{partner.name}</Media>
           {partner.description}
@@ -31,9 +36,11 @@ function RenderPartner({ partner }) {
 function PartnerList(props) {
   const partners = props.partners.partners.map((partner) => {
     return (
-      <Media key={partner.id} tag="li">
-        <RenderPartner partner={partner} />
-      </Media>
+      <Fade in key={partner.id}>
+        <Media tag="li">
+          <RenderPartner partner={partner} />
+        </Media>
+      </Fade>
     );
   });
 
@@ -41,9 +48,9 @@ function PartnerList(props) {
     return (
       <div className="container">
         <div className="row">
-            <Loading />
-          </div>
+          <Loading />
         </div>
+      </div>
     );
   }
   if (props.errMess) {
@@ -60,9 +67,11 @@ function PartnerList(props) {
 
   return (
     <div className="col mt-4">
-      <Media list>{partners}</Media>
+      <Media list>
+        <Stagger in>{partners}</Stagger>
+      </Media>
     </div>
-  )
+  );
 }
 
 function About(props) {
